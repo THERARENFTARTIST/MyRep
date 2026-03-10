@@ -14,7 +14,7 @@ pipeline {
                 publishHTML([
                     allowmissing:true,
                     alwaysLinkToLastBuild:false,
-                    KeepAll:false,
+                    keepAll:false,
                     reportDir:'.',
                     reportFiles:'Hello.html',
                     reportName:'My HTML Pipe Page'
