@@ -13,7 +13,7 @@ pipeline {
             steps {
                 publishHTML([
                     allowmissing:true,
-                    alwaysLinktoLastBuild:false,
+                    alwaysLinkToLastBuild:false,
                     KeepAll:false,
                     reportDir:'.',
                     reportFiles:'Hello.html',
