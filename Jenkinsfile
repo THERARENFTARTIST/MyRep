@@ -4,24 +4,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Clones the repository
+                echo 'Checking out repo'
                 git 'https://github.com/THERARENFTARTIST/MyRep.git'
             }
         }
 
-        stage('Build') {
+        stage('Publish') {
             steps {
-                echo 'Compiling in Progress'
-                // Compiles the Java file on Windows (bat)
-                bat 'javac Hello1.java'
-            }
-        }
-
-        stage('Execute') {
-            steps {
-                echo 'Executing...'
-                // Runs the compiled Java class
-                bat 'java Hello1'
+                publishHTML([
+                    allowmissing:true,
+                    alwaysLinktoLastBuild:false,
+                    KeepAll:false,
+                    reportDir:'.',
+                    reportFiles:'Hello.html',
+                    reportName:'My HTML Pipe Page'
+                ])
             }
         }
     }
