@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('#1.Checkout') {
             steps {
-                git 'https://github.com/THERARENFTARTIST/MyRep',branch:'master'
+                git 'https://github.com/THERARENFTARTIST/MyRep'
             }
         }
 
