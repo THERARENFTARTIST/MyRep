@@ -2,23 +2,26 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('#1.Checkout') {
             steps {
-                echo 'Checking out repo'
-                git 'https://github.com/THERARENFTARTIST/MyRep.git'
+                git 'https://github.com/THERARENFTARTIST/MyRep',branch:'master'
             }
         }
 
-        stage('Publish') {
+        stage('#2.Build the image') {
             steps {
-                publishHTML([
-                    allowMissing:true,
-                    alwaysLinkToLastBuild:false,
-                    keepAll:false,
-                    reportDir:'.',
-                    reportFiles:'Hello.html',
-                    reportName:'My HTML Pipe Page'
-                ])
+                bat 'docker build -t mywebsite .'
+            }
+        }
+        stage('#3.Stop all old containers'){
+            steps{
+                bat 'docker stop mycont || exit 0'
+                bat 'docker rm mycont || exit 0'
+            }
+        }
+        stage('#4.Run the image - Containerize'){
+            steps{
+                bat 'docker run -d -p 4000:80 --name mycont mywebsite'
             }
         }
     }
